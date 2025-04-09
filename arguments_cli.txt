@@ -1,0 +1,1 @@
+python cli_app.py -o "London, UK" -d "Jaipur, India" -s 2025-05-01 -e 2025-05-10 -i "2 adults who love shopping, food, tracking, forts"

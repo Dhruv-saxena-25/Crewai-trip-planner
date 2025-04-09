@@ -4,7 +4,7 @@ import streamlit as st
 from langchain_core.language_models.chat_models import BaseChatModel
 from crewai import LLM
 from tools.browser_tools import BrowserTools
-from tools.calculator_tool import CalculatorTools
+from tools.calculator_tools import CalculatorTools
 from tools.search_tools import SearchTools
 
 
@@ -14,20 +14,20 @@ class TripAgents():
             self.llm = LLM(model="gemini/gemini-2.0-flash")
         else:
             self.llm = llm
+            
         # Initialize tools once
-        self.search_tools = SearchTools()
-        self.browser_tools = BrowserTools()
-        self.calculator_tools = CalculatorTools()
-    
+        self.search_tool = SearchTools()
+        self.browser_tool = BrowserTools()
+        self.calculator_tool = CalculatorTools()
     def city_selection_agent(self):
         return Agent(
-            role = "City Selection Expert",
-            goal = "Select the best city based on weather, season, and prices'",
-            backstroy = "An expert in analyzing travel data to pick ideal destinations",
-            tools = [self.search_tools, self.browser_tools],
-            allow_deligation= False,
-            llm = self.llm
-            verbose= True
+            role='City Selection Expert',
+            goal='Select the best city based on weather, season, and prices',
+            backstory='An expert in analyzing travel data to pick ideal destinations',
+            tools=[self.search_tool, self.browser_tool],
+            allow_delegation=False,
+            llm=self.llm,
+            verbose=True
         )
         
     def local_expert(self):
